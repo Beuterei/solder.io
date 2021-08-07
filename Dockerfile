@@ -22,6 +22,4 @@ COPY scripts/ scripts/
 
 RUN chmod +x scripts/script.sh
 
-VOLUME [ "/var/www/html" ]
-
 CMD scripts/script.sh
