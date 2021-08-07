@@ -1,0 +1,40 @@
+version: "3.7"
+services:
+    solder:
+        container_name: solderProd
+
+        environment:
+            VIRTUAL_HOST: ${HOST?Missing environment variable see doku}
+            VIRTUAL_PORT: 8080
+            LETSENCRYPT_HOST: ${HOST:?Missing environment variable see readme}
+            SOLDER_AUTHOR_EMAIL: ${SOLDER_AUTHOR_EMAIL?Missing environment variable see doku}
+            SOLDER_AUTHOR_PASS: ${SOLDER_AUTHOR_PASS?Missing environment variable see doku}
+            SOLDER_DB_USER: ${DB_USER-solderProd}
+            SOLDER_DB_NAME: ${DB_DATABASE-solderProd}
+            SOLDER_DB_PASS: ${DB_PASSWORD?Missing environment variable see doku}
+            SOLDER_HOST: ${SOLDER_HOST?Missing environment variable see doku}
+
+        networks:
+            - default
+            - nginxproxynet
+
+    mariadb:
+        container_name: solderMariadbProd
+
+        healthcheck:
+            test:
+                [
+                    "CMD-SHELL",
+                    'mysql -h "0.0.0.0" --user=${DB_USER-solderProd} --password=${DB_PASSWORD?Missing environment variable see doku} --execute "SELECT 1;"',
+                ]
+
+        environment:
+            FORCE_COLOR: 1
+            MYSQL_DATABASE: ${DB_DATABASE-solderProd}
+            MYSQL_USER: ${DB_USER-solderProd}
+            MYSQL_PASSWORD: ${DB_PASSWORD?Missing environment variable see doku}
+
+networks:
+    nginxproxynet:
+        name: ${PROXY_NETWORK_NAME-nginxproxynet}
+        external: true

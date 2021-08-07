@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+    solder:
+        ports:
+            - 3321:80
+
+        container_name: solderDev
+
+        environment:
+            FORCE_COLOR: 1
+            SOLDER_AUTHOR_EMAIL: ${SOLDER_AUTHOR_EMAIL-admin@localhost.de}
+            SOLDER_AUTHOR_PASS: ${SOLDER_AUTHOR_PASS-shd757bshb7v6sv}
+            SOLDER_DB_USER: ${DB_USER-solderDev}
+            SOLDER_DB_NAME: ${DB_DATABASE-solderDev}
+            SOLDER_DB_PASS: ${DB_PASSWORD-8j38ppKjsvHGdph}
+            SOLDER_HOST: ${SOLDER_HOST-localhost}
+
+    mariadb:
+        container_name: solderMariadbDev
+
+        healthcheck:
+            test:
+                [
+                    "CMD-SHELL",
+                    'mysql -h "0.0.0.0" --user=${DB_USER-solderDev} --password=${DB_PASSWORD-8j38ppKjsvHGdph} --execute "SELECT 1;"',
+                ]
+
+        environment:
+            FORCE_COLOR: 1
+            MYSQL_DATABASE: ${DB_DATABASE-solderDev}
+            MYSQL_USER: ${DB_USER-solderDev}
+            MYSQL_PASSWORD: ${DB_PASSWORD-8j38ppKjsvHGdph}
