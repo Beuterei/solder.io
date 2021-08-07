@@ -4,9 +4,9 @@ services:
         container_name: solderProd
 
         environment:
-            VIRTUAL_HOST: ${HOST?Missing environment variable see doku}
+            VIRTUAL_HOST: ${SOLDER_HOST?Missing environment variable see doku}
             VIRTUAL_PORT: 8080
-            LETSENCRYPT_HOST: ${HOST:?Missing environment variable see readme}
+            LETSENCRYPT_HOST: ${SOLDER_HOST:?Missing environment variable see readme}
             SOLDER_AUTHOR_EMAIL: ${SOLDER_AUTHOR_EMAIL?Missing environment variable see doku}
             SOLDER_AUTHOR_PASS: ${SOLDER_AUTHOR_PASS?Missing environment variable see doku}
             SOLDER_DB_USER: ${DB_USER-solderProd}

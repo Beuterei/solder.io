@@ -2,6 +2,8 @@ FROM php:7.4-apache
 
 EXPOSE 80
 
+COPY phpIni /usr/local/etc/
+
 RUN apt-get update && apt-get -y install git libzip-dev zip \
     && apt-get clean -y
 
