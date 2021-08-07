@@ -7,8 +7,7 @@ author_pass=$(echo -n $SOLDER_AUTHOR_PASS$salt | sha256sum | awk '{print $1}')
 
 
 # sed config file
-rm functions/config.php
-cat <<EOF >>functions/config.php
+cat <<EOF >functions/config.php
 <?php
     return array(
         "configured" => true,
