@@ -5,7 +5,7 @@ services:
 
         environment:
             VIRTUAL_HOST: ${SOLDER_HOST?Missing environment variable see doku}
-            VIRTUAL_PORT: 8080
+            VIRTUAL_PORT: 80
             LETSENCRYPT_HOST: ${SOLDER_HOST:?Missing environment variable see readme}
             SOLDER_AUTHOR_EMAIL: ${SOLDER_AUTHOR_EMAIL?Missing environment variable see doku}
             SOLDER_AUTHOR_PASS: ${SOLDER_AUTHOR_PASS?Missing environment variable see doku}

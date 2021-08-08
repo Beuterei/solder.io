@@ -17,7 +17,6 @@ RUN chown -R www-data .
 RUN a2enmod rewrite
 
 COPY phpIni/ "$PHP_INI_DIR/conf.d/"
-RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 RUN service apache2 restart
 
